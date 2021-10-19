@@ -89,7 +89,7 @@ RSpec.describe 'Advanced Nested Collections' do
       # require 'pry'; binding.pry
       value[:dishes].each do |i|
         # require 'pry'; binding.pry
-        ingredients << i[:ingredients].concat
+        ingredients.concat (i[:ingredients])
         # require 'pry'; binding.pry
         # i += 1 #pass in the dish names, then do a loop for the
         #ingredients which should be roughly
