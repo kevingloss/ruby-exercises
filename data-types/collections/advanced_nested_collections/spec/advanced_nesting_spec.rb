@@ -21,57 +21,81 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(employees).to eq(expected)
   end
 
-  xit 'test 2' do
+  it 'test 2' do
     # Find the ingredients for pancakes
-    pancake_ingredients = _____
+    # require 'pry'; binding.pry
+    pancake_ingredients = stores[:dennys][:dishes][0][:ingredients]
 
     expected = ["Flour", "Eggs", "Milk", "Syrup"]
     expect(pancake_ingredients).to eq(expected)
   end
 
-  xit 'test 3' do
+  it 'test 3' do
     # Find the price of risotto
-    risotto_price = ____
+    risotto_price = stores[:olive_garden][:dishes][0][:price]
 
     expect(risotto_price).to eq(12)
   end
 
-  xit 'test 4' do
+  it 'test 4' do
     # Find the ingredients for a Big Mac
-    big_mac_ingredients = ____
-
+    big_mac_ingredients = stores[:macdonalds][:dishes].find{"Big Mac"}[:ingredients]
+    # require 'pry'; binding.pry
     expected = ['Bun','Hamburger','Ketchup','pickles']
     expect(big_mac_ingredients).to eq(expected)
   end
 
-  xit 'test 5' do
+  it 'test 5' do
     # Find a list of restaurants
-    store_names = ____
+    # require 'pry'; binding.pry
+    store_names = stores.keys
 
     expected = [:olive_garden, :dennys, :macdonalds]
     expect(store_names).to eq(expected)
   end
 
-  xit 'test 6' do
+  it 'test 6' do
     # Find dishes names for Olive Garden
-    dishes_names = ____
-
+    dishes_names = []
+    dishes = stores[:olive_garden][:dishes].each do |dish|
+      dishes_names << dish[:name]
+    end
+    # require 'pry'; binding.pry
     expect(dishes_names).to eq(['Risotto', 'Steak'])
   end
 
-  xit 'test 7' do
+  it 'test 7' do
     # Return a list of employees across
     # all restaurants
-    employee_names = ____
+
+    employee_names = []
+      stores.each do |k,v|
+        employee_names.concat (v[:employees])
+        # require 'pry'; binding.pry
+      end
+      # employee_names = employees.flatten
 
     expected = ["Jeff", "Zach", "Samantha", "Bob", "Sue", "James", "Alvin", "Simon", "Theodore"]
     expect(employee_names).to eq(expected)
   end
 
-  xit 'test 8' do
+  it 'test 8' do
     # Return a list of all ingredients
     # across all restaurants
-    ingredients = ____
+    ingredients = []
+    i = 0
+
+    stores.each do |key, value|
+      # require 'pry'; binding.pry
+      value[:dishes].each do |i|
+        # require 'pry'; binding.pry
+        ingredients << i[:ingredients].concat
+        # require 'pry'; binding.pry
+        # i += 1 #pass in the dish names, then do a loop for the
+        #ingredients which should be roughly
+      end
+      # require 'pry'; binding.pry
+    end
 
     expected = [
       "Rice",
@@ -107,7 +131,7 @@ RSpec.describe 'Advanced Nested Collections' do
     # Return the full menu for Olive Garden
 
     olive_garden_menu = _____
-    
+
     expected = {
       "Risotto" => {
         :name => "Risotto",
